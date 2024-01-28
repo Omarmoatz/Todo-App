@@ -20,17 +20,17 @@
         <tr v-for="(task,index) in tasks" :key='index'>
           <th scope="row">{{task.name}}</th>
           <td>
-            <span @click="changeStatus(index)">
+            <span @click="changeStatus(index)" class="pointer">
               {{task.status}}
             </span>
           </td>
           <td>
-            <div @click="editTask(index)">
+            <div @click="editTask(index)" class="pointer">
               <span class="fa fa-pen" ></span>
             </div>
           </td>
           <td>
-            <div @click="deleteTask(index)">
+            <div @click="deleteTask(index)" class="pointer">
               <span class="fa fa-trash" ></span>
             </div>
           </td>
@@ -99,4 +99,11 @@ export default{
 
 }
 </script>
+
+<style>
+  .pointer{
+    cursor: pointer;
+  }
+
+</style>
 
