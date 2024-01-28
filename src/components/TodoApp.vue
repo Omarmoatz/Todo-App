@@ -21,7 +21,7 @@
           <th scope="row">{{task.name}}</th>
           <td>{{task.status}}</td>
           <td>
-            <div >
+            <div @click="editTask(index)">
               <span class="fa fa-pen" ></span>
             </div>
           </td>
@@ -45,6 +45,7 @@ export default{
   data(){
     return {
       taskInput:'',
+      editedTask: null,
       tasks:[
       {
         name:'study english ',
@@ -61,14 +62,27 @@ export default{
   methods:{
     submitTask(){
       if (this.taskInput == 0) return ;
-      this.tasks.push({
-        name: this.taskInput,
-        status:'todo'
-      })
+      if (this.editedTask == null){
+          this.tasks.push({
+          name: this.taskInput,
+          status:'todo'
+          })
+        }
+      else{
+        this.tasks[this.editedTask].name = this.taskInput
+        this.editedTask = null;
+      }
+
       this.taskInput = ''
     },
+
     deleteTask(index){
       this.tasks.splice(index,1)
+    },
+
+    editTask(index){
+      this.taskInput = this.tasks[index].name
+      this.editedTask= index;
     }
   }
 
