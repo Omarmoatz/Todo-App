@@ -18,9 +18,21 @@
       </thead>
       <tbody>
         <tr v-for="(task,index) in tasks" :key='index'>
-          <th scope="row">{{task.name}}</th>
+          <th scope="row" :class="{
+              'bg-danger': task.status == 'todo',
+              'bg-success': task.status == 'finished',
+              'bg-warning': task.status == 'inProgress'
+            }">
+            <span :class="{'finished': task.status == 'finished'}">
+              {{task.name}}
+            </span>
+          </th>
           <td>
-            <span @click="changeStatus(index)" class="pointer">
+            <span @click="changeStatus(index)" class="pointer" :class="{
+              'text-danger': task.status == 'todo',
+              'text-success': task.status == 'finished',
+              'text-warning': task.status == 'inProgress'
+              }">
               {{task.status}}
             </span>
           </td>
@@ -58,7 +70,7 @@ export default{
       },
       {
         name:'study vuejs',
-        status:'finished'
+        status:'todo'
       }
     ]
     }
@@ -103,6 +115,9 @@ export default{
 <style>
   .pointer{
     cursor: pointer;
+  }
+  .finished{
+    text-decoration: line-through;
   }
 
 </style>
