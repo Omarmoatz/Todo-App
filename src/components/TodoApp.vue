@@ -21,12 +21,12 @@
           <th scope="row">{{task.name}}</th>
           <td>{{task.status}}</td>
           <td>
-            <div>
+            <div >
               <span class="fa fa-pen" ></span>
             </div>
           </td>
           <td>
-            <div>
+            <div @click="deleteTask(index)">
               <span class="fa fa-trash" ></span>
             </div>
           </td>
@@ -66,6 +66,9 @@ export default{
         status:'todo'
       })
       this.taskInput = ''
+    },
+    deleteTask(index){
+      this.tasks.splice(index,1)
     }
   }
 
