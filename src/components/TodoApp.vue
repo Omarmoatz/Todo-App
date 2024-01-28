@@ -19,7 +19,11 @@
       <tbody>
         <tr v-for="(task,index) in tasks" :key='index'>
           <th scope="row">{{task.name}}</th>
-          <td>{{task.status}}</td>
+          <td>
+            <span @click="changeStatus(index)">
+              {{task.status}}
+            </span>
+          </td>
           <td>
             <div @click="editTask(index)">
               <span class="fa fa-pen" ></span>
@@ -46,6 +50,7 @@ export default{
     return {
       taskInput:'',
       editedTask: null,
+      statusChioce: ['todo','inProgress','finished'],
       tasks:[
       {
         name:'study english ',
@@ -53,7 +58,7 @@ export default{
       },
       {
         name:'study vuejs',
-        status:'completed'
+        status:'finished'
       }
     ]
     }
@@ -83,6 +88,12 @@ export default{
     editTask(index){
       this.taskInput = this.tasks[index].name
       this.editedTask= index;
+    },
+
+    changeStatus(index){
+      let indexId = this.statusChioce.indexOf(this.tasks[index].status)
+      if (++indexId  > 2) indexId = 0
+      this.tasks[index].status = this.statusChioce[indexId]
     }
   }
 
