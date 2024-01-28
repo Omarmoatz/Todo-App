@@ -2,8 +2,8 @@
   <div class="container">
       <h1 class="text-center mt-5">ToDo App</h1>
       <div class="d-flex mt-5">
-        <input class="form-control w-100 " type="text" name="text">
-        <button class="btn btn-warning" type="button">Add</button>
+        <input class="form-control w-100" type="text" placeholder="enter your task" v-model="taskInput">
+        <button class="btn btn-warning" @click="submitTask()" type="button">Add</button>
       </div>
   </div>
   <div class="container">
@@ -17,9 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"> study js </th>
-          <td>todo</td>
+        <tr v-for="(task,index) in tasks" :key='index'>
+          <th scope="row">{{task.name}}</th>
+          <td>{{task.status}}</td>
           <td>
             <div>
               <span class="fa fa-pen" ></span>
@@ -41,7 +41,34 @@ export default{
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return {
+      taskInput:'',
+      tasks:[
+      {
+        name:'study english ',
+        status:'in progress'
+      },
+      {
+        name:'study vuejs',
+        status:'completed'
+      }
+    ]
+    }
+  },
+
+  methods:{
+    submitTask(){
+      if (this.taskInput == 0) return ;
+      this.tasks.push({
+        name: this.taskInput,
+        status:'todo'
+      })
+      this.taskInput = ''
+    }
   }
+
 }
 </script>
 
